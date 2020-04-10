@@ -36,10 +36,16 @@ table{
     border: 2px solid black;
     border-collapse: collapse;
 }
-td{
-    color : $color;
-    border: 2px solid black;
-    text-align: center;
-    padding-left: 10px;
-    padding-right: 10px;
+div{
+    h3{
+        font-weight: bold;
+    }
+    td{
+        color : $color;
+        border: 2px solid black;
+        text-align: center;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-style: italic;
+    }
 }

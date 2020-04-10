@@ -26,6 +26,10 @@ h3{
     text-align: center;
     color:ghostwhite;
 }
+#id{
+    text-align: center;
+    color: ghostwhite;
+}
 @media (min-width: 500px) {
     h1::before {
         content : "MY DREAM CARS"
