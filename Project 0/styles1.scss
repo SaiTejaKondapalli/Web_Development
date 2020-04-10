@@ -1,8 +1,8 @@
-$color: blue;
+$color : rgb(25, 25, 83);
 h1{
     text-align: center;
-    color: darkblue;
-    background-color: lightblue;
+    color: ghostwhite;
+    background-color: darkslategrey;
 }
 .center{
     display: block;
@@ -21,13 +21,14 @@ li{
 }
 @media (min-width: 500px) {
     body {
-        background-color:antiquewhite;
+        background-color:lightgrey;
     }
 }
 
 @media (max-width: 500px) {
     body {
-        background-color:lightgrey;
+        background-color:lightcyan;
+        font-size: 14px;
     }
 }
 table{

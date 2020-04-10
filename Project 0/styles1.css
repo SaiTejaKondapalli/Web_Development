@@ -1,7 +1,7 @@
 h1 {
   text-align: center;
-  color: darkblue;
-  background-color: lightblue;
+  color: ghostwhite;
+  background-color: darkslategrey;
 }
 
 .center {
@@ -12,7 +12,7 @@ h1 {
 }
 
 li {
-  color: blue;
+  color: #191953;
   font-size: 18px;
 }
 
@@ -24,13 +24,14 @@ li {
 
 @media (min-width: 500px) {
   body {
-    background-color: antiquewhite;
+    background-color: lightgrey;
   }
 }
 
 @media (max-width: 500px) {
   body {
-    background-color: lightgrey;
+    background-color: lightcyan;
+    font-size: 14px;
   }
 }
 
@@ -46,7 +47,7 @@ div h3 {
 }
 
 div td {
-  color: blue;
+  color: #191953;
   border: 2px solid black;
   text-align: center;
   padding-left: 10px;
