@@ -36,6 +36,7 @@ table{
     border: 2px solid black;
     border-collapse: collapse;
 }
+// Nesting scss
 div{
     h3{
         font-weight: bold;
@@ -48,4 +49,13 @@ div{
         padding-right: 10px;
         font-style: italic;
     }
+}
+%bold {
+    font-weight: bold;
+}
+
+.spec{
+    @extend %bold;
+    background-color: grey;
+    color : ghostwhite
 }

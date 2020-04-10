@@ -53,4 +53,13 @@ div td {
   padding-right: 10px;
   font-style: italic;
 }
+
+.spec {
+  font-weight: bold;
+}
+
+.spec {
+  background-color: grey;
+  color: ghostwhite;
+}
 /*# sourceMappingURL=styles1.css.map */
