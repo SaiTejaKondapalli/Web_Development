@@ -51,6 +51,7 @@ div{
         font-style: italic;
     }
 }
+
 %bold {
     font-weight: bold;
 }
@@ -59,4 +60,9 @@ div{
     @extend %bold;
     background-color: grey;
     color : ghostwhite
+}
+
+.row{
+    background-color: gray;
+    color : ghostwhite;
 }
