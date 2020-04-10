@@ -1,0 +1,51 @@
+h1 {
+  text-align: center;
+  color: darkblue;
+  background-color: lightblue;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
+
+li {
+  color: blue;
+  font-size: 18px;
+}
+
+@media print {
+  .screen-only {
+    display: none;
+  }
+}
+
+@media (min-width: 500px) {
+  body {
+    background-color: antiquewhite;
+  }
+}
+
+@media (max-width: 500px) {
+  body {
+    background-color: lightgrey;
+  }
+}
+
+table {
+  margin-right: auto;
+  margin-left: auto;
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+
+td {
+  color: blue;
+  border: 2px solid black;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+/*# sourceMappingURL=styles1.css.map */

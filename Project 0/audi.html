@@ -4,39 +4,7 @@
         <title>Audi R8</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <style>
-            h1{
-                text-align: center;
-                color: darkblue;
-                background-color: lightblue;
-            }
-            .center{
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
-                width: 40%;
-            }
-            li{
-                font-size: 18px;
-            }
-            @media print {
-              .screen-only{
-                display: none;
-              }
-            }
-            @media (min-width: 500px) {
-                body {
-                    background-color:antiquewhite;
-                }
-            }
-
-            @media (max-width: 500px) {
-                body {
-                    background-color:lightgrey;
-                }
-            }
-
-        </style>
+        <link rel="stylesheet" href="styles1.css">
     </head>
     <body>
         <h1>Audi R8</h1>
@@ -47,12 +15,22 @@
                 <li>The car is exclusively designed, developed, and manufactured by Audi AG's private subsidiary company manufacturing high performance automotive parts, Audi Sport GmbH (formerly quattro GmbH), and is based on the Lamborghini Gallardo and presently the Huracán platform.The fundamental construction of the R8 is based on the Audi Space Frame, and uses an aluminium monocoque which is built using space frame principles. The car is built by Audi Sport GmbH in a newly renovated factory at Audi's 'aluminium site' at Neckarsulm in Germany.</li>
             </ul>
         </div>
-        <br><br>
-        <div class = "screen-only">
-          <div class="col text-center">
-              <a class="btn btn-primary" href="index.html" role="button">Back</a>
-          </div>
+        <div style = "text-align: center;">
+            <h3>Specifications</h3>
+            <table>
+                <tr><td>Engine CC</td><td>5204 cc</td></tr>
+                <tr><td>Mileage</td><td>16.1 kmpl</td></tr>
+                <tr><td>Max Power</td><td>602 bhp</td></tr>
+                <tr><td>Max Torque</td><td>560 nm</td></tr>
+                <tr><td>Transmission</td><td>Automatic</td></tr>
+                <tr><td>Boot Space</td><td>112 nm</td></tr>
+            </table>
         </div>
-
+        <br>
+        <div class = "screen-only">
+            <div class="col text-center">
+                <a class="btn btn-primary" href="index.html" role="button">Back</a>
+            </div>
+        </div>
     </body>
 </html>
