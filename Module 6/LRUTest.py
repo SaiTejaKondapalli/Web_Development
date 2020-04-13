@@ -5,7 +5,7 @@ def main():
     test.put(1, "Sai")
     test.put(2, "Teja")
     test.put(3, "Kondapalli")
-    assert test.input_dict = {1: "Sai", 2: "Teja", 3: "Kondapalli"}
+    assert test.cache_dict == {1: "Sai", 2: "Teja", 3: "Kondapalli"}
     print("Put test case passed")
 
 if __name__ == "__main__":
