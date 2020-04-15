@@ -5,13 +5,17 @@ body
     background-repeat: no-repeat;
     background-size: cover;
 }
+h1{
+    color:ghostwhite;
+    font-weight: 800;
+}
 .container
 {
     height: 100vh;
     width: 100%;
     align-items:center;
     justify-content:center;
-    opacity: .90;
+    /* opacity: .90; */
 }
 .form
 {
