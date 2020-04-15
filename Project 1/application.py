@@ -4,7 +4,7 @@ import os
 # from flask_session import Session
 # from sqlalchemy import create_engine
 # from sqlalchemy.orm import scoped_session, sessionmaker
-from flask import Flask,render_template
+from flask import Flask,render_template,request
 
 app = Flask(__name__)
 
@@ -22,6 +22,9 @@ app = Flask(__name__)
 # db = scoped_session(sessionmaker(bind=engine))
 
 @app.route("/")
-@app.route("/register")
 def index():
     return render_template("index.html")
+@app.route("/register",methods=["POST"])
+def register():
+    name1 = request.form['name']
+    return render_template("register.html",name=name1)
