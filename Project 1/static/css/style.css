@@ -9,6 +9,10 @@ h1{
     color:ghostwhite;
     font-weight: 800;
 }
+h4{
+    color : ghostwhite;
+    text-align: center;
+}
 .container
 {
     height: 100vh;

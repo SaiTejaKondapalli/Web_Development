@@ -27,4 +27,11 @@ def index():
 @app.route("/register",methods=["POST"])
 def register():
     name1 = request.form['name']
-    return render_template("register.html",name=name1)
+    pswd1 = request.form['pswd']
+    pswd2 = request.form['rpswd']
+    if pswd1 == pswd2:
+        return render_template("register.html", name=name1)
+    else:
+        wrong = "mismatch"
+        return render_template("index.html", name=wrong)
+
