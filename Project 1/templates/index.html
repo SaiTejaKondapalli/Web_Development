@@ -13,9 +13,9 @@
         <div><h4>Password mismatch please register again<h4>
     {% endif %}
     <div class = "container d-flex">
-        <form class = "form text-center" action = "{{ url_for('register') }}" method = "POST">
+        <form class = "form text-center" method = "POST">
+            <!-- action = "{{ url_for('register') }}" -->
             <h1>REGISTRATION</h1><br>
-            <!-- <h1 class="mt-5 font-weight-bolder text-uppercase ">Registration</h1><br> -->
             <div class="form-group">
                 <input type = "text" name = "name" class = "form-control rounded-pill form-control-lg" placeholder="Enter Your Name" required>
             </div>
@@ -36,7 +36,7 @@
             <div class="form-group">
                 <input type = "password" name = "rpswd" class = "form-control rounded-pill form-control-lg" placeholder="Renter password" required>
             </div>
-            <button type= "submit" class = "btn mt-3 btn-primary btn-custom btn-block text-uppercase rounded-pill btn-lg">
+            <button type= "submit" onclick="register()" class = "btn mt-3 btn-primary btn-custom btn-block text-uppercase rounded-pill btn-lg">
                 Register
             </button>
         </form>
