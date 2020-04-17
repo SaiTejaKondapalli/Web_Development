@@ -43,12 +43,11 @@ def register():
                 user = User(email=email, name=name, pswd=pswdhash1,timestamp=datetime.now())
                 db.add(user)
             except:
-                return render_template("index.html", name="error")
+                return render_template("index.html", name="Registration unsuccessful")
             db.commit()
             return render_template("register.html", name=name)
         else:
-            wrong = "mismatch"
-            return render_template("index.html", name=wrong)
+            return render_template("index.html", name="Passwords mismatch please register again")
 @app.route("/admin", methods=["GET"])
 def admin():
     users = db.query(User).order_by(desc(User.timestamp))

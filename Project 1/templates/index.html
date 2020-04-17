@@ -9,12 +9,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    {% if name == "mismatch" %}
-        <div><h4>Password mismatch please register again<h4>
-    {% endif %}
-    {% if name == "error" %}
-        <div><h4>Registration unsuccessful<h4>
-    {% endif %}
+    <div><h4>{{ name }}</h4></div>
     <div class = "container d-flex">
         <form class = "form text-center" action = "{{ url_for('register') }}" method = "POST">
             <!-- action = "{{ url_for('register') }}" -->
