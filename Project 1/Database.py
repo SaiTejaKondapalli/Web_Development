@@ -13,3 +13,15 @@ class User(db_base):
 
 engine = create_engine(os.getenv("DATABASE_URL"))
 db_base.metadata.create_all(engine)
+
+# from datetime import datetime
+# from flask_sqlalchemy import SQLAlchemy
+
+# db = SQLAlchemy()
+
+# class User(db.Model):
+#     __tablename__ = "users"
+#     email = db.Column(db.String(30), primary_key=True)
+#     name = db.Column(db.String(30), nullable=False)
+#     pswd = db.Column(db.String(50), nullable=False)
+#     timestamp = db.Column(db.DateTime(timezone=True), nullable=False)
