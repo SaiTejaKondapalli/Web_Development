@@ -24,14 +24,17 @@ engine = create_engine(os.getenv("DATABASE_URL"))
 db_session = scoped_session(sessionmaker(bind=engine))
 db = db_session()
 
-@app.route("/", methods=["GET","POST"])
+@app.route("/", methods=["GET", "POST"])
+@app.route("/login", methods=["GET","POST"])
 def login():
     if request.method == "GET":
         return render_template("login.html")
     elif request.method == "POST":
-        uemail = request.get['email']
-        pswd = request.get['pswd']
-        return render_template("home.html",name = "Successfully logged in")
+        uemail = request.form['email']
+        pswd = request.form['pswd']
+        if uemail == "":
+            return render_template("index.html",name = "")
+        return render_template("dashboard.html",name = "Successfully logged in")
         # return render_template("index.html",name = "Not registered !!! Please register here")
 
 @app.route("/register",methods=["GET","POST"])
@@ -42,22 +45,29 @@ def register():
     elif request.method == "POST":
         session["data"] = []
         name = request.form['name']
+        session["data"].append(name)
         email = request.form['email']
+        session["data"].append(email)
         pswd1 = request.form['pswd']
         pswdhash1 = hashlib.md5(pswd1.encode()).hexdigest()
+        session["data"].append(pswdhash1)
         pswd2 = request.form['rpswd']
         pswdhash2 = hashlib.md5(pswd2.encode()).hexdigest()
         if pswd1 == pswd2:
             try:
                 user = User(email=email, name=name, pswd=pswdhash1,timestamp=datetime.now())
-                db.add(user)
+                db.session.add(user)
             except:
                 return render_template("index.html", name="Registration unsuccessful")
-            db.commit()
+            db.session.commit()
             return render_template("register.html", name=name)
         else:
             return render_template("index.html", name="Passwords mismatch please register again")
 @app.route("/admin", methods=["GET"])
 def admin():
     users = db.query(User).order_by(desc(User.timestamp))
-    return render_template("admin.html",users = users)
+    return render_template("admin.html", users=users)
+
+# @app.route("/dashboard", methods=["GET"])
+# def dashboard():
+#     return render_template("dashboard.html",name = "Login success!!!")
