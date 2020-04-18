@@ -24,7 +24,16 @@ engine = create_engine(os.getenv("DATABASE_URL"))
 db_session = scoped_session(sessionmaker(bind=engine))
 db = db_session()
 
-@app.route("/")
+@app.route("/", methods=["GET","POST"])
+def login():
+    if request.method == "GET":
+        return render_template("login.html")
+    elif request.method == "POST":
+        uemail = request.get['email']
+        pswd = request.get['pswd']
+        return render_template("home.html",name = "Successfully logged in")
+        # return render_template("index.html",name = "Not registered !!! Please register here")
+
 @app.route("/register",methods=["GET","POST"])
 def register():
     # return render_template("index.html")
