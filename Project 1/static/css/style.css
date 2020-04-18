@@ -5,6 +5,10 @@ body
     background-repeat: no-repeat;
     background-size: cover;
 }
+div{
+    color: ghostwhite;
+    font-size: 14px;
+}
 h1{
     color:ghostwhite;
     font-weight: 800;
