@@ -4,7 +4,7 @@ from flask import session
 from flask_session import Session
 from sqlalchemy import create_engine,desc
 from sqlalchemy.orm import scoped_session, sessionmaker
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect,url_for
 from Database import User
 from datetime import datetime
 
@@ -32,9 +32,19 @@ def login():
     elif request.method == "POST":
         uemail = request.form['email']
         pswd = request.form['pswd']
+        pswdhashed = hashlib.md5(pswd.encode()).hexdigest()
+        users = db.query(User).get(uemail)
+        # print(users.email)
+        # print(users.pswd)
         if uemail == "":
-            return render_template("index.html",name = "")
-        return render_template("dashboard.html",name = "Successfully logged in")
+            return render_template("index.html", name="")
+        if users is not None:
+            # print("1")
+            if((uemail==users.email) and (pswdhashed==users.pswd)):
+                # print("inside condition")
+                return render_template("dashboard.html", name="Successfully logged in")
+        # return render_template("index.html",name = "Not registered !!! Please register here")
+        return redirect(url_for('register'))
         # return render_template("index.html",name = "Not registered !!! Please register here")
 
 @app.route("/register",methods=["GET","POST"])
@@ -56,11 +66,12 @@ def register():
         if pswd1 == pswd2:
             try:
                 user = User(email=email, name=name, pswd=pswdhash1,timestamp=datetime.now())
-                db.session.add(user)
+                db.add(user)
             except:
                 return render_template("index.html", name="Registration unsuccessful")
-            db.session.commit()
-            return render_template("register.html", name=name)
+            db.commit()
+            # return render_template("register.html", name=name)
+            return redirect(url_for('login'))
         else:
             return render_template("index.html", name="Passwords mismatch please register again")
 @app.route("/admin", methods=["GET"])

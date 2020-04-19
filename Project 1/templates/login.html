@@ -11,7 +11,7 @@
 <body>
     <div><h4>{{ name }}</h4></div>
     <div class = "container d-flex">
-        <form class = "form text-center" method = "POST">
+        <form class = "form text-center" action = "{{ url_for ('login') }}" method = "POST">
             <!-- action = "{{ url_for ('login') }}" -->
             <!-- action = "{{ url_for('register') }}" -->
             <h1>LOGIN</h1><br>
@@ -21,7 +21,7 @@
             <div class="form-group">
                 <input type = "password" name = "pswd" class = "form-control rounded-pill form-control-lg" placeholder="Enter password" required>
             </div>
-            <button type= "submit" onclick = "login()" class = "btn mt-3 btn-primary btn-custom btn-block text-uppercase rounded-pill btn-lg">
+            <button type= "submit" class = "btn mt-3 btn-primary btn-custom btn-block text-uppercase rounded-pill btn-lg">
                 Login
             </button><br>
             <!-- <button type = "submit" onclick = "register()" class = "btn mt-3 btn-primary btn-custom btn-block text-uppercase rounded-pill btn-lg">
