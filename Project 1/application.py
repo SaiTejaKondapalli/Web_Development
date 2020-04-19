@@ -86,5 +86,4 @@ def auth():
             # print("inside condition")
             session['data'] = uemail
             return render_template("dashboard.html", name="Successfully logged in "+users.name)
-    # return render_template("index.html",name = "Not registered !!! Please register here")
     return redirect(url_for('register',arg=1))
