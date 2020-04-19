@@ -25,33 +25,20 @@ db_session = scoped_session(sessionmaker(bind=engine))
 db = db_session()
 
 @app.route("/", methods=["GET", "POST"])
-@app.route("/login", methods=["GET","POST"])
-def login():
+def index():
     if request.method == "GET":
+        if session.get('data') is not None:
+            return render_template("dashboard.html", name=session.get('data'))
+        # return redirect(url_for('login'))
         return render_template("login.html")
-    elif request.method == "POST":
-        uemail = request.form['email']
-        pswd = request.form['pswd']
-        pswdhashed = hashlib.md5(pswd.encode()).hexdigest()
-        users = db.query(User).get(uemail)
-        # print(users.email)
-        # print(users.pswd)
-        if uemail == "":
-            return render_template("index.html", name="")
-        if users is not None:
-            # print("1")
-            if((uemail==users.email) and (pswdhashed==users.pswd)):
-                # print("inside condition")
-                return render_template("dashboard.html", name="Successfully logged in")
-        # return render_template("index.html",name = "Not registered !!! Please register here")
-        return redirect(url_for('register'))
-        # return render_template("index.html",name = "Not registered !!! Please register here")
 
-@app.route("/register",methods=["GET","POST"])
-def register():
-    # return render_template("index.html")
+@app.route("/register", methods=["GET", "POST"])
+@app.route("/register/<int:arg>", methods=["GET", "POST"])
+def register(arg=None):
     if request.method == "GET":
-        return render_template("index.html")
+        if arg == 1:
+            name = "Not registered user !!! Please register here"
+        return render_template("index.html",name=name)
     elif request.method == "POST":
         session["data"] = []
         name = request.form['name']
@@ -70,8 +57,8 @@ def register():
             except:
                 return render_template("index.html", name="Registration unsuccessful")
             db.commit()
-            # return render_template("register.html", name=name)
-            return redirect(url_for('login'))
+            return render_template("login.html", name="Registration success. Please login here!!!")
+            # return redirect(url_for('login'))
         else:
             return render_template("index.html", name="Passwords mismatch please register again")
 @app.route("/admin", methods=["GET"])
@@ -79,6 +66,25 @@ def admin():
     users = db.query(User).order_by(desc(User.timestamp))
     return render_template("admin.html", users=users)
 
-# @app.route("/dashboard", methods=["GET"])
-# def dashboard():
-#     return render_template("dashboard.html",name = "Login success!!!")
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
+
+@app.route("/auth", methods=["POST"])
+def auth():
+    uemail = request.form['email']
+    pswd = request.form['pswd']
+    pswdhashed = hashlib.md5(pswd.encode()).hexdigest()
+    users = db.query(User).get(uemail)
+    # print(users.email)
+    # print(users.pswd)
+    if uemail == "":
+        return render_template("index.html", name="")
+    if users is not None:
+        if((uemail==users.email) and (pswdhashed==users.pswd)):
+            # print("inside condition")
+            session['data'] = uemail
+            return render_template("dashboard.html", name="Successfully logged in "+users.name)
+    # return render_template("index.html",name = "Not registered !!! Please register here")
+    return redirect(url_for('register',arg=1))
