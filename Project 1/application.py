@@ -37,8 +37,9 @@ def index():
 def register(arg=None):
     if request.method == "GET":
         if arg == 1:
-            name = "Not registered user !!! Please register here"
-        return render_template("index.html",name=name)
+            msg = "Not registered user !!! Please register here"
+            return render_template("index.html", name = msg)
+        return render_template("index.html")
     elif request.method == "POST":
         session["data"] = []
         name = request.form['name']
@@ -50,7 +51,7 @@ def register(arg=None):
         session["data"].append(pswdhash1)
         pswd2 = request.form['rpswd']
         pswdhash2 = hashlib.md5(pswd2.encode()).hexdigest()
-        if pswd1 == pswd2:
+        if pswdhash1 == pswdhash2:
             try:
                 user = User(email=email, name=name, pswd=pswdhash1,timestamp=datetime.now())
                 db.add(user)
