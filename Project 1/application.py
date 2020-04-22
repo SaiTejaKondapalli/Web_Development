@@ -1,5 +1,6 @@
 import os
-import hashlib
+# import hashlib
+from passlib.hash import sha256_crypt
 from flask import session
 from flask_session import Session
 from sqlalchemy import create_engine,desc
@@ -47,11 +48,11 @@ def register(arg=None):
         email = request.form['email']
         session["data"].append(email)
         pswd1 = request.form['pswd']
-        pswdhash1 = hashlib.md5(pswd1.encode()).hexdigest()
+        pswdhash1 = sha256_crypt.encrypt(pswd1)
         session["data"].append(pswdhash1)
         pswd2 = request.form['rpswd']
-        pswdhash2 = hashlib.md5(pswd2.encode()).hexdigest()
-        if pswdhash1 == pswdhash2:
+        pswdhash2 = sha256_crypt.encrypt(pswd2)
+        if pswd1 == pswd2:
             try:
                 user = User(email=email, name=name, pswd=pswdhash1,timestamp=datetime.now())
                 db.add(user)
@@ -76,14 +77,15 @@ def logout():
 def auth():
     uemail = request.form['email']
     pswd = request.form['pswd']
-    pswdhashed = hashlib.md5(pswd.encode()).hexdigest()
+    password = sha256_crypt.encrypt(pswd)
     users = db.query(User).get(uemail)
     # print(users.email)
     # print(users.pswd)
     if uemail == "":
         return render_template("index.html", name="")
     if users is not None:
-        if((uemail==users.email) and (pswdhashed==users.pswd)):
+        if ((uemail == users.email) and (sha256_crypt.verify(pswd, users.pswd))):
+        # (pswdhashed==users.pswd)):
             # print("inside condition")
             session['data'] = uemail
             return render_template("dashboard.html", name="Successfully logged in "+users.name)
