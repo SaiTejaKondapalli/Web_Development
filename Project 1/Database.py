@@ -1,4 +1,4 @@
-import os
+import os,csv
 from sqlalchemy import Column, String, DateTime,create_engine
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -11,8 +11,16 @@ class User(db_base):
     pswd = Column(String(50), nullable=False)
     timestamp = Column(DateTime(timezone=True), nullable=False)
 
+class Book(db_base):
+    __tablename__ = "books"
+    isbn = Column(String(30), primary_key = True)
+    title = Column(String(30), nullable = False)
+    author = Column(String(30), nullable = False)
+    year = Column(String(30), nullable = False)
+
 engine = create_engine(os.getenv("DATABASE_URL"))
 db_base.metadata.create_all(engine)
+
 
 # from datetime import datetime
 # from flask_sqlalchemy import SQLAlchemy
