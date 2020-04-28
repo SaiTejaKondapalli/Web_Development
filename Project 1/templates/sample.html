@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/css/mdb.min.css" rel="stylesheet">
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/js/mdb.min.js"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/details.css') }}">
+        <link rel="icon" href="../static/css/images/favicon.ico" type="image/gif" sizes="16x16">
+        <title>Home</title>
+    </head>
+
+    <body>
+        <header>
+            <div id="logout">
+                <a href="{{url_for('logout')}}" title="Log Out">
+                    <svg class="bi bi-power" width="1.5em" height="2em" viewBox="0 0 16 16" fill="black"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M5.578 4.437a5 5 0 104.922.044l.5-.866a6 6 0 11-5.908-.053l.486.875z"
+                            clip-rule="evenodd" />
+                        <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+            <div id="title">
+                <a href="{{ url_for('index')}}" title="Go to Home">Books Ville</a>
+            </div>
+
+        </header>
+        <!-- <h1>Hi {{ name }}, Welcome to Books Ville</h1> -->
+        <h2>Find your favorite book here</h2>
+        <h2>{% for each in l %}
+                {{each}}
+            {% endfor %}
+        </h2>
+    </body>
+
+</html>

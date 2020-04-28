@@ -1,6 +1,6 @@
 import os
-# import hashlib
-from passlib.hash import sha256_crypt
+import hashlib
+# from passlib.hash import sha256_crypt
 from flask import session
 from flask_session import Session
 from sqlalchemy import create_engine,desc
@@ -48,10 +48,12 @@ def register(arg=None):
         email = request.form['email']
         session["data"].append(email)
         pswd1 = request.form['pswd']
-        pswdhash1 = sha256_crypt.encrypt(pswd1)
+        # pswdhash1 = sha256_crypt.encrypt(pswd1)
+        pswdhash1 = hashlib.md5(pswd1.encode()).hexdigest()
         session["data"].append(pswdhash1)
         pswd2 = request.form['rpswd']
-        pswdhash2 = sha256_crypt.encrypt(pswd2)
+        # pswdhash2 = sha256_crypt.encrypt(pswd2)
+        pswdhash2 = hashlib.md5(pswd2.encode()).hexdigest()
         if pswd1 == pswd2:
             try:
                 user = User(email=email, name=name, pswd=pswdhash1,timestamp=datetime.now())
@@ -77,16 +79,28 @@ def logout():
 def auth():
     uemail = request.form['email']
     pswd = request.form['pswd']
-    password = sha256_crypt.encrypt(pswd)
+    # password = sha256_crypt.encrypt(pswd)
+    pswdhashed = hashlib.md5(pswd.encode()).hexdigest()
     users = db.query(User).get(uemail)
     # print(users.email)
     # print(users.pswd)
     if uemail == "":
         return render_template("index.html", name="")
     if users is not None:
-        if ((uemail == users.email) and (sha256_crypt.verify(pswd, users.pswd))):
+        if ((uemail == users.email) and (pswdhashed==users.pswd)):
+        # (sha256_crypt.verify(pswd, users.pswd))):
         # (pswdhashed==users.pswd)):
             # print("inside condition")
             session['data'] = uemail
-            return render_template("dashboard.html", name="Successfully logged in "+users.name)
-    return redirect(url_for('register',arg=1))
+            # return render_template("dashboard.html", name="Successfully logged in "+users.name)
+            return render_template("review.html")
+    return redirect(url_for('register', arg=1))
+
+@app.route("/review", methods=["POST"])
+def review():
+    l = []
+    rating = request.form['star']
+    l.append(rating)
+    review = request.form['tbox']
+    l.append(review)
+    return render_template("sample.html", l = l)
