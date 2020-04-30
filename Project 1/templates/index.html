@@ -7,12 +7,42 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- <link rel="stylesheet" type="text/css" href="static/css/style.css"> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script>
+        function validate(form){
+            document.getElementById('pswd_error').innerHTML = "";
+            var pswd = document.getElementById('pswd').value;
+            if (pswd.length < 6) {
+				document.getElementById('pswd_error').innerHTML = "Password should be greater than 6 characters";
+				return false;
+			}
+			else if (!/[a-z]/g.test(pswd)) {
+				document.getElementById('pswd_error').innerHTML = "Password requires atleast one lowercase";
+				return false;
+			}
+			else if (!/[A-Z]/g.test(pswd)) {
+				document.getElementById('pswd_error').innerHTML = "Password requires atleast one uppercase";
+				return false;
+			}
+			else if (!/[1-9]/g.test(pswd)) {
+				document.getElementById('pswd_error').innerHTML = "Password requires atleast one digit";
+				return false;
+			}
+			else if (!/[!@#\$%\^\&*\)\(+=._-]/.test(pswd)) {
+				document.getElementById('pswd_error').innerHTML = "Password requires atleast one special character";
+				return false;
+            }
+            else{
+                return true;
+            }
+        }
+
+    </script>
 </head>
 <body>
+    <h3></h3>
     <div><h4>{{ name }}</h4></div>
     <div class = "container d-flex">
-        <form class = "form text-center" action = "{{ url_for('register') }}" method = "POST">
-            <!-- action = "{{ url_for('register') }}" -->
+        <form class = "form text-center" action = "{{ url_for('register') }}" method = "POST" onsubmit = "return validate(this);">
             <h1>REGISTRATION</h1><br>
             <div class="form-group">
                 <input type = "text" name = "name" class = "form-control rounded-pill form-control-lg" placeholder="Enter Your Name" required>
@@ -26,10 +56,12 @@
                 </select>
             </div>
             <div class="form-group">
-                <input type = "text" name = "email" class = "form-control rounded-pill form-control-lg" placeholder="Enter Email" required>
+                <input id = "email" type = "email" name = "email" class = "form-control rounded-pill form-control-lg" placeholder="Enter Email" required>
+                <span class = "error"><p id = "email_error"></p></span>
             </div>
             <div class="form-group">
-                <input type = "password" name = "pswd" class = "form-control rounded-pill form-control-lg" placeholder="Enter password" required>
+                <input id = "pswd" type = "password" name = "pswd" class = "form-control rounded-pill form-control-lg" placeholder="Enter password" required>
+                <span class = "error"><p id = "pswd_error"></p></span>
             </div>
             <div class="form-group">
                 <input type = "password" name = "rpswd" class = "form-control rounded-pill form-control-lg" placeholder="Renter password" required>
