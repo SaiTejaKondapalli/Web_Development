@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+    <title>TODO App</title>
+    <style>
+        #mainTable {
+            font-size: xx-large;
+            font-weight: bolder;
+            width: 40vw;
+            padding-left: 10vw;
+            margin-left: 20vw;
+            margin-top: 10vh;
+        }
+
+        #addButton {
+            background-color: rgb(199, 180, 15);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        #taskName, #dueDate, #deleteButton {
+            border: 2px solid black;
+            text-align: left;
+            color: black;
+            font-weight: bolder;
+            font-size: 16px;
+            margin: 4px 2px;
+            height: 3.5vh;
+        }
+
+        #deleteButton {
+            background-color: rgb(212, 71, 71);
+        }
+
+    </style>
+</head>
+<body>
+    <div id="todo"></div>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="ToDo.js" type="text/babel"></script>
+</body>
+</html>
